@@ -1,1 +1,1 @@
-// -- no code yet
+alert("Let the game start");
