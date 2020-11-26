@@ -16,18 +16,38 @@ function clickButton(e) {
 
   if (currentplayer === "red") {
     clickButtonRef.setAttribute("style", "background-color:red");
+    clickButtonRef.classList.add("red");
+    checkGameStatus(clickButtonRef);
     currentplayer = "blue";
-    checkGameStatus();
   } else {
     clickButtonRef.setAttribute("style", "background-color:blue");
+    clickButtonRef.classList.add("blue");
+    checkGameStatus(clickButtonRef);
     currentplayer = "red";
-    checkGameStatus();
   }
 }
 
 // -- Functino runs each time a selection is made to determine if there is a winner
-function checkGameStatus() {
-  console.log("checking");
+function checkGameStatus(playerSelection) {
+  //   console.log(playerSelection.className); //value is either red or blue
+  switch (playerSelection.id) {
+    case "a1":
+      break;
+
+    default:
+      break;
+  }
+}
+
+// -- to declare the winner
+function declareWinner() {
+  if (currentplayer === "red") {
+    alert("Player 1: Red wins the game!");
+    location.reload();
+  } else {
+    alert("Player 2: Blue wins the game!");
+    location.reload();
+  }
 }
 
 // -- add an event listener to all the buttons
