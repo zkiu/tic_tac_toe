@@ -3,8 +3,12 @@
 // -- global variables
 const player1 = "red";
 const player2 = "blue";
+let computerPlayer2 = true;
 
 let currentplayer = "red";
+
+let choiseArray = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"];
+let lastPlayer1Selection = "";
 
 const turnKeeper = document.querySelector("#turnKeeper");
 
@@ -21,14 +25,49 @@ function clickButton(e) {
     clickButtonRef.classList.add("red");
     // -- check if there is a winner
     checkGameStatus(clickButtonRef);
-    // -- if no winner, then change player
-    changePlayer();
+    lastPlayer1Selection = e.target.id;
+    removeChoise(e.target.id);
+
+    if (computerPlayer2 === true) {
+      computerSelection();
+    } else {
+      // -- if no winner, then change player
+      changePlayer();
+    }
   } else {
     clickButtonRef.setAttribute("style", "background-color:blue");
     clickButtonRef.classList.add("blue");
     checkGameStatus(clickButtonRef);
+    removeChoise(e.target.id);
     changePlayer();
   }
+}
+
+function computerSelection() {
+  let choise = smartChoiseSelection();
+  let element = document.querySelector(`#${choise}`);
+  element.setAttribute("disabled", "");
+  element.setAttribute("style", "background-color:blue");
+  element.classList.add("blue");
+  checkGameStatus(element);
+  removeChoise(choise);
+}
+
+function smartChoiseSelection() {
+  // *** parse lastPlayer1Selection by row (a) and by column (1). Check if row has 2 reds, if so then block with blue. if not, check if column has 2 reds, if so then block with blue. Check diagonals if has 2 reds...
+}
+
+function removeChoise(selection) {
+  // console.log("value for: selection ");
+  // console.log(selection);
+  let tempArray = choiseArray.filter((item) => {
+    return item !== selection;
+  });
+
+  choiseArray = tempArray;
+
+  // console.log("value for: choiseArray ");
+  // console.log(choiseArray);
 }
 
 function changePlayer() {
